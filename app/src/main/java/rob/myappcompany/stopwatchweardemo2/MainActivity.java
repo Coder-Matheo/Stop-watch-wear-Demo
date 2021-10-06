@@ -20,10 +20,10 @@ public class MainActivity extends Activity {
 
     private Button stopButton;
     private Button startButton;
-    private NumberPicker numberPicker;
+
 
     private boolean timerRunning;
-    public static long MILLIS_IN_FUTURE = new Long(2000);
+    public static long MILLIS_IN_FUTURE = new Long(7000);
 
     private long leftTimeInMillis = MILLIS_IN_FUTURE;
     private CountDownTimer countDownTimer;
@@ -41,23 +41,8 @@ public class MainActivity extends Activity {
         mTextView = findViewById(R.id.timerTextView);
         startButton = findViewById(R.id.startButton);
         stopButton = findViewById(R.id.stopButton);
-        numberPicker = findViewById(R.id.timerNumberPicker);
 
-        numberPicker.setMinValue(10000);
-        numberPicker.setMaxValue(30000);
-
-
-
-        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-
-                Log.i(tag, String.valueOf(numberPicker));
-
-                MILLIS_IN_FUTURE = new Long(numberPicker.getValue());
-
-            }
-        });
+        mTextView.setText("00:00");
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +68,7 @@ public class MainActivity extends Activity {
 
     private void startTimer() {
         mTextView.setVisibility(View.VISIBLE);
-        numberPicker.setVisibility(View.GONE);
+
         stopButton.setVisibility(View.GONE);
         startButton.setText("Pause");
 
@@ -99,8 +84,8 @@ public class MainActivity extends Activity {
             public void onFinish() {
                 //mTextView.setText("00:00");
                 timerRunning = false;
-                numberPicker.setVisibility(View.VISIBLE);
-                mTextView.setVisibility(View.GONE);
+
+                mTextView.setText("00:00");
             }
         }.start();
         timerRunning = true;
